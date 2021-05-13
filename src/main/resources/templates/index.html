@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments :: html_head">
+<body>
+	<header th:replace="fragments :: html_header"></header>
+	<div></div>
+	<section id="hero">
+		<div class="hero-container">
+
+			<div id="heroCarousel" class="carousel slide carousel-fade"
+				data-bs-ride="carousel" data-bs-interval="5000">
+
+				<ol id="hero-carousel-indicators" class="carousel-indicators"></ol>
+
+				<div class="carousel-inner" role="listbox">
+					<div class="carousel-item"
+						style="background-image: url(img/hero-carousel/2.jpg)">
+						<div class="carousel-container">
+							<div class="container">
+								<p class="animate__animated animate__fadeInUp">We are here
+									to help with understanding your Your taxes and benefit along
+									side them</p>
+								<br /> <br /> <br /> <br /> <a href="#about"
+									class="btn-get-started scrollto animate__animated animate__fadeInUp">Get
+									Started</a> <br /> <br /> <br />
+							</div>
+						</div>
+					</div>
+					<div class="carousel-item active"
+						style="background-image: url(img/hero-carousel/1.jpg)">
+						<div class="carousel-container">
+							<div class="container">
+								<p class="animate__animated animate__fadeInUp">We calculate
+									your Deductions, Tax Credits and your Net Salary with respect
+									to your age, Tax Year,Medical Aid and your Annual/Monthly
+									Salary before tax.</p>
+								<a href="#calculate"
+									class="btn-get-started scrollto animate__animated animate__fadeInUp">Get
+									Started</a> <br /> <br /> <br /> <br /> <br /> <br />
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<a class="carousel-control-prev" href="#heroCarousel" role="button"
+					data-bs-slide="prev"> <span
+					class="carousel-control-prev-icon bi bi-chevron-left"
+					aria-hidden="true"></span>
+				</a> <a class="carousel-control-next" href="#heroCarousel" role="button"
+					data-bs-slide="next"> <span
+					class="carousel-control-next-icon bi bi-chevron-right"
+					aria-hidden="true"></span>
+				</a>
+
+			</div>
+			<br /> <br /> <br /> <br /> <br />
+		</div>
+	</section>
+
+	<main id="main">
+		<br /> <br /> <br /> <br /> <br /> <br />
+
+		<div class="container" id="calculate">
+			<div align="center">
+				<h2 class="header">KSquared Tax Calculation</h2>
+			</div>
+			<form th:action="@{/results}" th:object="${tax}"
+				style="max-width: 600px; margin: 0 auto;" method="post">
+				<div class="m-3">
+					<div class="form-group row">
+						<label for="taxYear" class="col-form-label col-4">Tax year</label>
+						<div class="col-sm-6">
+							<select id="taxYear" th:field="*{taxYear}" class="form-control">
+								<option value="0">--None--</option>
+								<option value="2020">2020</option>
+								<option value="2021">2021</option>
+							</select>
+						</div>
+					</div>
+				</div>
+
+				<div class="m-3">
+					<div class="form-group row">
+						<label for="age" class="col-form-label col-4">Age</label>
+						<div class="col-sm-6">
+							<input type="number" th:field="*{age}" name="age"
+								class="form-control" id="age" placeholder="User's Age">
+						</div>
+					</div>
+				</div>
+				<div class="m-3">
+					<div class="form-group row">
+						<label for="earning" class="col-form-label col-4">Total
+							Taxable Earnings</label>
+						<div class="col-sm-6">
+							<input type="text" name="earning" th:field="*{earning}"
+								class="form-control" id="earning" placeholder="User's Salary">
+						</div>
+					</div>
+				</div>
+				<div class="m-3">
+					<div class="form-group row">
+						<label for="inputPassword3" class="col-form-label col-4">Taxable
+							Earnings Provided</label>
+						<div class="col-sm-6">
+							<select id="earningType" name="earningType"
+								th:field="*{earningType}" class="form-control">
+								<option value="">--None--</option>
+								<option value="monthly">Monthly</option>
+								<option value="yearly">Yearly</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="m-3">
+					<div class="form-group row">
+						<label for="members" class="col-form-label col-4">Medical
+							Aid Members</label>
+						<div class="col-sm-6">
+							<input type="number" name="members" th:field="*{members}"
+								class="form-control" id="members"
+								placeholder="Number of dependants in your Medical Aid">
+						</div>
+					</div>
+				</div>
+				<div class="m-3">
+					<div class="form-group row">
+						<label for="taxCredit" class="col-form-label col-4"> Tax
+							Credits</label>
+						<div class="col-sm-6">
+							<input type="number" disabled="disabled" name="taxCredit"
+								th:field="*{taxCredit}" class="form-control" id="taxCredit">
+						</div>
+					</div>
+				</div>
+				<div class="m-3">
+					<div class="form-group row">
+						<label for="payeMonthlyBeforeTaxCred" class="col-form-label col-4">Calculated
+							Paye Monthly(Before Tax Credit)</label>
+						<div class="col-sm-6">
+							<input type="number" disabled="disabled" name="total"
+								th:field="*{payeMonthlyBeforeTaxCred}" class="form-control"
+								id="payeMonthlyBeforeTaxCred">
+						</div>
+					</div>
+				</div>
+				<div class="m-3">
+					<div class="form-group row">
+						<label for="payeYearlyBeforeTaxCred" class="col-form-label col-4">Calculated
+							Paye Yearly(Before Tax Credit) </label>
+						<div class="col-sm-6">
+							<input type="number" disabled="disabled" name="total"
+								th:field="*{payeYearlyBeforeTaxCred}" class="form-control"
+								id="payeYearlyBeforeTaxCred"
+								placeholder="Number of dependants in your Medical Aid">
+						</div>
+					</div>
+				</div>
+				<div class="m-3">
+					<div class="form-group row">
+						<label for="members" class="col-form-label col-4">Net Cash
+							Pay - After Paye Due</label>
+						<div class="col-sm-6">
+							<input type="number" name="total" th:field="*{total}"
+								disabled="disabled" class="form-control" id="members"
+								placeholder="Number of dependants in your Medical Aid">
+						</div>
+					</div>
+				</div>
+				<div class="m-3">
+					<div class="form-group row">
+						<label for="members" class="col-form-label col-4">Paye Due</label>
+						<div class="col-sm-6">
+							<input type="number" disabled="disabled" name="total"
+								th:field="*{payeDue}" class="form-control" id="payeDue"
+								placeholder="Number of dependants in your Medical Aid">
+						</div>
+					</div>
+				</div>
+				<div class="m-3">
+					<div class="form-group row">
+						<div class="col-12" align="center">
+							<button class="btn btn-success" type="submit" style="width: 40%">Calculate</button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div align="center" id="tax_table">
+			<h1>Tax Information</h1>
+			<br /> <br />
+			<table class="table">
+				<thead class="thead-dark">
+					<tr>
+						<th>Tax Year</th>
+						<th>Taxable Income</th>
+						<th>Rate of Tax</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="t : ${taxes}">
+						<td th:text="${t.taxYear}"></td>
+						<td><span th:text="${t.minimum}"></span>-<span
+							th:text="${t.maximum}"></span></td>
+						<th><span th:if="${t.rate} > '0'" th:text="${t.rate}"></span>
+							<span th:if="${t.rate} > '0'"> + </span> <span
+							th:text="${t.percentage}"></span> <span>% of taxable
+								income</span> <span th:if="${t.rate} > '0'" th:text="${t.minimum}-1"></span>
+						</th>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</main>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('#fileImage').change(function(){
+				showImageThumbnail(this);
+			});
+		});
+		
+		function showImageThumbnail(fileInput){
+			file = fileInput.files[0];
+			reader = new FileReader();
+			
+			reader.onload = function(e){
+				$('#thumbnail').attr('src', e.target.result);
+			};
+			
+			reader.readAsDataURL(file);
+		}
+		
+	</script>
+</body>
+</html>
